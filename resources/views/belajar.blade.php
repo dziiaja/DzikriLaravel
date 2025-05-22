@@ -31,6 +31,7 @@
             <th>Nama Lengkap</th>
             <th>Jenis Kelamin</th>
             <th>Golongan Darah</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +42,16 @@
             <td>{{ $row->nama_lengkap }}</td>
             <td>{{ $row->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
             <td>{{ $row->golongan_darah }}</td>
-        </tr>
+            <td>
+                <a href="{{ url('/siswa/edit/'. $row->id)}}">Edit</a>
+                <form action="{{ url('/siswa', $row->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+                
+        </tr>   
         @endforeach
     </tbody>
 </table>
